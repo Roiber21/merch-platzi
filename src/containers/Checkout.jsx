@@ -21,6 +21,11 @@ function Checkout() {
     <>
       <Helmet>
         <title> Lista de pedidos - Platzi Conf Merch </title>
+        <meta
+          name="description"
+          content="Encuentra todos tus productos favoritos"
+        />
+
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@TU_USER" />
         <meta name="twitter:creator" content="@TU_USER" />

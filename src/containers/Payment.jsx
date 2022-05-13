@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { PayPalButton } from 'react-paypal-button-v2';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import AppContext from '../context/AppContext';
 import '../styles/components/Payment.scss';
 
@@ -38,30 +39,40 @@ function Payment() {
     return sum;
   };
   return (
-    <div className="Payment">
-      <div className="Payment-content">
-        <h3>Resumen del pedido:</h3>
-        {cart.map((item) => (
-          <div className="Payment-item" key={item.title}>
-            <div className="Payment-element">
-              <h4>{item.title}</h4>
-              <span> $ {item.price}</span>
+    <>
+      <Helmet>
+        <title>Resumen del pedido - Platzi Conf Merch</title>
+        <meta
+          name="description"
+          content="Encuentra todos tus productos favoritos"
+        />
+      </Helmet>
+
+      <div className="Payment">
+        <div className="Payment-content">
+          <h3>Resumen del pedido:</h3>
+          {cart.map((item) => (
+            <div className="Payment-item" key={item.title}>
+              <div className="Payment-element">
+                <h4>{item.title}</h4>
+                <span> $ {item.price}</span>
+              </div>
             </div>
+          ))}
+          <div className="Payment-button">
+            <PayPalButton
+              paypalOptions={paypalOtions}
+              buttonStyles={buttonStyles}
+              amount={handleSumTotal()}
+              onSuccess={(data) => handlePaymentSuccess(data)}
+              onError={(error) => console.log(error)}
+              onCancel={(data) => console.log(data)}
+            />
           </div>
-        ))}
-        <div className="Payment-button">
-          <PayPalButton
-            paypalOptions={paypalOtions}
-            buttonStyles={buttonStyles}
-            amount={handleSumTotal()}
-            onSuccess={(data) => handlePaymentSuccess(data)}
-            onError={(error) => console.log(error)}
-            onCancel={(data) => console.log(data)}
-          />
         </div>
+        <div />
       </div>
-      <div />
-    </div>
+    </>
   );
 }
 
